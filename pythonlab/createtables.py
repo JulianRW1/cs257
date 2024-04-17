@@ -1,3 +1,5 @@
+import psycopg2
+
 def create_tables():
     
   conn = psycopg2.connect(
