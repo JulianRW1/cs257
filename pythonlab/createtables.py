@@ -11,14 +11,14 @@ def create_tables():
 
   cur = conn.cursor()
 
-  cities = """CREATE TABLE DROP TABLE IF EXISTS cities;
+  cities = """DROP TABLE IF EXISTS cities;
     CREATE TABLE cities (
       code text,
       state text,
       pop real
     );"""
 
-  states = """CREATE TABLE DROP TABLE IF EXISTS states;
+  states = """DROP TABLE IF EXISTS states;
     CREATE TABLE states (
       city text,
       state text,
