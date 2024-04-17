@@ -2,23 +2,23 @@ import psycopg2
 
 def create_tables():
     
-  conn = psycopg2.connect(
+    conn = psycopg2.connect(
       host="localhost",
       port=5432,   
       database="walstonj",
       user="walstonj",
       password="tablet995sunshine")
-
-  cur = conn.cursor()
-
-  cities = """DROP TABLE IF EXISTS cities;
+    
+    cur = conn.cursor()
+    
+    cities = """DROP TABLE IF EXISTS cities;
     CREATE TABLE cities (
       code text,
       state text,
       pop real
     );"""
-
-  states = """DROP TABLE IF EXISTS states;
+    
+    states = """DROP TABLE IF EXISTS states;
     CREATE TABLE states (
       city text,
       state text,
@@ -26,7 +26,9 @@ def create_tables():
       lat real,
       long real
     );""" 
-  cur.execute(cities)
-  cur.execute(states)
+    cur.execute(cities)
+    cur.execute(states)
+    conn.commit()
+
 
 create_tables()
