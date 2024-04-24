@@ -27,10 +27,11 @@ def query():
       long real
     );""" 
 
-    cur.execute("""SELECT * FROM cities WHERE city LIKE 'Northfield';""");
+    cur.execute("""SELECT * FROM cities WHERE city LIKE 'Northfield';""")
+    print('nofo: ' + cur.fetchone())
 
-    var = cur.fetchone()
-    print(var)
+    cur.execute("""SELECT * FROM cities WHERE city LIKE 'Seattle';""")
+    print('seattle: ' + cur.fetchone())
     # cur.execute()
     # cur.fetchone()
     conn.commit()
