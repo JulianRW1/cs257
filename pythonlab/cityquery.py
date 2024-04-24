@@ -74,6 +74,7 @@ def query():
     cur.execute("SELECT * FROM cities WHERE state LIKE '" + state + "'")
 
     all_cities = cur.fetchall()
+    print(all_cities)
     
     total_population = 0
     for city in all_cities:
