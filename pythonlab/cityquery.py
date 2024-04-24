@@ -27,20 +27,19 @@ def query():
       long real
     );""" 
 
-    cur.execute("""SELECT * FROM cities WHERE city LIKE 'Northfield';""")
+    cur.execute("SELECT * FROM cities WHERE city LIKE 'Northfield';")
     var = cur.fetchone()
     if (var == None):
         print('Northfield is not present in the database')
     else:
-        print(var)
-
-    cur.execute("""SELECT * FROM cities WHERE city LIKE 'Seattle';""")
-    var = cur.fetchone()
-    if (var == None):
-        print('Seattle is not present in the database')
-    else:
         print('Latitude: ' + str(var[3]) + ' Longitude: ' + str(var[4]))
 
+    cur.execute("SELECT * FROM cities ORDER BY pop DESC")
+    print('The city with the largest population is ' + str(cur.fetchone()))
+
+    cur.execute("SELECT * FROM cities WHERE state LIKE 'Minnesota' ORDER BY pop")
+    print("Minnesota's smallest city is: " + cur.fetchone())
+    
     conn.commit()
 
 
