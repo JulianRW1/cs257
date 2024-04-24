@@ -39,7 +39,7 @@ def query():
     if (var == None):
         print('Seattle is not present in the database')
     else:
-        print(var)
+        print('Latitude: ' + var.lat + ' Longitude: ' + var.long)
 
     conn.commit()
 
