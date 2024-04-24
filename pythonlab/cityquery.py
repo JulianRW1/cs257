@@ -78,6 +78,7 @@ def query():
     
     total_population = 0
     for city in all_cities:
+        print(city[2])
         total_population += city[2]
 
     print('total population: ' + str(total_population))
