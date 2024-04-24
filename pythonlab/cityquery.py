@@ -71,7 +71,7 @@ def query():
     print(var)
     print('state: ' + state)
 
-    cur.execute("SELECT * FROM cities WHERE state LIKE " + state + "'")
+    cur.execute("SELECT * FROM cities WHERE state LIKE '" + state + "'")
 
     all_cities = cur.fetchall()
     
