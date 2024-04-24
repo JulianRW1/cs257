@@ -28,12 +28,19 @@ def query():
     );""" 
 
     cur.execute("""SELECT * FROM cities WHERE city LIKE 'Northfield';""")
-    print('nofo: ' + cur.fetchone())
+    var = cur.fetchone()
+    if (var == None):
+        print('Northfield is not present in the database')
+    else:
+        print(var)
 
     cur.execute("""SELECT * FROM cities WHERE city LIKE 'Seattle';""")
-    print('seattle: ' + cur.fetchone())
-    # cur.execute()
-    # cur.fetchone()
+    var = cur.fetchone()
+    if (var == None):
+        print('Seattle is not present in the database')
+    else:
+        print(var)
+
     conn.commit()
 
 
