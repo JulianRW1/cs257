@@ -1,6 +1,6 @@
 import psycopg2
 
-def query():
+def city_queries():
     
     conn = psycopg2.connect(
       host="localhost",
@@ -10,37 +10,24 @@ def query():
       password="tablet995sunshine")
     
     cur = conn.cursor()
-    
-    states = """DROP TABLE IF EXISTS states;
-    CREATE TABLE states (
-      code text,
-      state text,
-      pop real
-    );"""
-    
-    cities = """DROP TABLE IF EXISTS cities;
-    CREATE TABLE cities (
-      city text,
-      state text,
-      pop real,
-      lat real,
-      long real
-    );""" 
 
+    # 1. check for Northfield
     cur.execute("SELECT * FROM cities WHERE city LIKE 'Northfield';")
-    var = cur.fetchone()
-    if var == None:
+    temp = cur.fetchone()
+    if temp == None:
         print('Northfield is not present in the database\n')
     else:
-        print('Latitude: ' + str(var[3]) + ' Longitude: ' + str(var[4]) +'\n')
+        print('Latitude: ' + str(temp[3]) + ' Longitude: ' + str(temp[4]) +'\n')
 
+    # 2. Find the city with the largest population
     cur.execute("SELECT * FROM cities ORDER BY pop DESC")
     print('The city with the largest population is ' + str(cur.fetchone()[0])+'\n')
 
+    # 3. Find the smallest city in Minnesota
     cur.execute("SELECT * FROM cities WHERE state LIKE 'Minnesota' ORDER BY pop")
     print("Minnesota's smallest city is: " + str(cur.fetchone()[0]) +'\n')
 
-    # North, South, East, West most cities
+    # 4. Find the cities furthest North, South, East, and West
     cur.execute("SELECT * FROM cities ORDER BY lat DESC LIMIT 1")
     north = str(cur.fetchone()[0])
 
@@ -54,34 +41,30 @@ def query():
     west = str(cur.fetchone()[0])
 
     print("Furthest North: " + north + 
-          " \nFurthest East: " + east +
-          " \nFurthest South: " + south +
-          " \nFurthest West: " + west +'\n')
+          "\nFurthest East: " + east +
+          "\nFurthest South: " + south +
+          "\nFurthest West: " + west +'\n')
     
     state = input('Enter a state: ').capitalize()
-    cur.execute("SELECT * FROM states WHERE code LIKE '" + state.upper() + "'")
-    
-    var = cur.fetchone()
-    if var != None:
-        state = str(var[1])
 
-    print(var)
-    print('state: ' + state)
+    cur.execute("SELECT * FROM states WHERE code LIKE '" + state.upper() + "'")
+    temp = cur.fetchone()
+    
+    if temp != None:
+        state = str(temp[1])
 
     cur.execute("SELECT * FROM cities WHERE state LIKE '" + state + "'")
-
     all_cities = cur.fetchall()
-    print(all_cities)
     
-    total_population = 0
-    for city in all_cities:
-        print(city[2])
-        total_population += city[2]
-
-    print('total population: ' + str(total_population))
-        
+    if all_cities == None:
+        print(state + ' is not in the database')
+    else:
+      total_population = 0
+      for city in all_cities:
+          total_population += city[2]
+      print('total population: ' + str(total_population))
 
     conn.commit()
 
 
-query()
+city_queries()
