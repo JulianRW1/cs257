@@ -20,7 +20,7 @@ def my_color(word1):
 def add(num1, num2):
     return str(int(num1) + int(num2))
 
-@app.route('pop/<abbr>')
+@app.route('/pop/<abbr>')
 def get_population(abbr):
     conn = psycopg2.connect(
       host="localhost",
