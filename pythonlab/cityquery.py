@@ -35,10 +35,10 @@ def query():
         print('Latitude: ' + str(var[3]) + ' Longitude: ' + str(var[4]))
 
     cur.execute("SELECT * FROM cities ORDER BY pop DESC")
-    print('The city with the largest population is ' + str(cur.fetchone()))
+    print('The city with the largest population is ' + str(cur.fetchone()[0]))
 
     cur.execute("SELECT * FROM cities WHERE state LIKE 'Minnesota' ORDER BY pop")
-    print("Minnesota's smallest city is: " + cur.fetchone())
+    print("Minnesota's smallest city is: " + str(cur.fetchone()[0]))
     
     conn.commit()
 
