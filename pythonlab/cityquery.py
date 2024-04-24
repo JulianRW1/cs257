@@ -30,15 +30,15 @@ def query():
     cur.execute("SELECT * FROM cities WHERE city LIKE 'Northfield';")
     var = cur.fetchone()
     if var == None:
-        print('Northfield is not present in the database')
+        print('Northfield is not present in the database\n')
     else:
-        print('Latitude: ' + str(var[3]) + ' Longitude: ' + str(var[4]))
+        print('Latitude: ' + str(var[3]) + ' Longitude: ' + str(var[4]) +'\n')
 
     cur.execute("SELECT * FROM cities ORDER BY pop DESC")
-    print('The city with the largest population is ' + str(cur.fetchone()[0]))
+    print('The city with the largest population is ' + str(cur.fetchone()[0])+'\n')
 
     cur.execute("SELECT * FROM cities WHERE state LIKE 'Minnesota' ORDER BY pop")
-    print("Minnesota's smallest city is: " + str(cur.fetchone()[0]))
+    print("Minnesota's smallest city is: " + str(cur.fetchone()[0]) +'\n')
 
     # North, South, East, West most cities
     cur.execute("SELECT * FROM cities ORDER BY lat DESC LIMIT 1")
@@ -54,14 +54,11 @@ def query():
     west = str(cur.fetchone()[0])
 
     print("Furthest North: " + north + 
-          " \nFurthest East" + east +
-          " \nFurthest South" + south +
-          " \nFurthest West" + west )
+          " \nFurthest East: " + east +
+          " \nFurthest South: " + south +
+          " \nFurthest West: " + west +'\n')
     
-    # user input
-    state = input('Enter a state: ')
-
-    #look up in abbreviations table
+    state = input('Enter a state: ').capitalize()
     cur.execute("SELECT * FROM states WHERE code LIKE '" + state.upper() + "'")
     
     var = cur.fetchone()
