@@ -44,13 +44,13 @@ def query():
     print("Minnesota's smallest city is: " + str(cur.fetchone()[0]))
 
     # North, South, East, West most cities
-    cur.execute("SELECT * FROM cities ORDER BY lat LIMIT 1 DESC")
+    cur.execute("SELECT * FROM cities ORDER BY lat DESC LIMIT 1")
     north = str(cur.fetchone())
 
     cur.execute("SELECT * FROM cities ORDER BY lat LIMIT 1")
     south = str(cur.fetchone())
 
-    cur.execute("SELECT * FROM cities ORDER BY long LIMIT 1 DESC")
+    cur.execute("SELECT * FROM cities ORDER BY long DESC LIMIT 1")
     east = str(cur.fetchone())
 
     cur.execute("SELECT * FROM cities ORDER BY long LIMIT 1")
