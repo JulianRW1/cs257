@@ -20,6 +20,22 @@ def my_color(word1):
 def add(num1, num2):
     return str(int(num1) + int(num2))
 
+@app.route('pop/<abbr>')
+def get_population(abbr):
+    conn = psycopg2.connect(
+      host="localhost",
+      port=5432,
+      database="walstonj",
+      user="walstonj",
+      password="tablet995sunshine")
+
+    cur = conn.cursor()
+
+    cur.execute("SELECT * FROM states WHERE code LIKE '" + abbr.upper() + "';")
+    pop = cur.fetchone()[2]
+    conn.commit()
+    return str(pop)
+
 if __name__ == '__main__':
     my_port = 5131
     app.run(host='0.0.0.0', port = my_port) 
