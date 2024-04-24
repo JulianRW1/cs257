@@ -39,7 +39,28 @@ def query():
 
     cur.execute("SELECT * FROM cities WHERE state LIKE 'Minnesota' ORDER BY pop")
     print("Minnesota's smallest city is: " + str(cur.fetchone()[0]))
-    
+
+    cur.execute("SELECT * FROM cities WHERE state LIKE 'Minnesota' ORDER BY pop")
+    print("Minnesota's smallest city is: " + str(cur.fetchone()[0]))
+
+    # North, South, East, West most cities
+    cur.execute("SELECT * FROM cities ORDER BY lat LIMIT 1 DESC")
+    north = str(cur.fetchone())
+
+    cur.execute("SELECT * FROM cities ORDER BY lat LIMIT 1")
+    south = str(cur.fetchone())
+
+    cur.execute("SELECT * FROM cities ORDER BY long LIMIT 1 DESC")
+    east = str(cur.fetchone())
+
+    cur.execute("SELECT * FROM cities ORDER BY long LIMIT 1")
+    west = str(cur.fetchone())
+
+    print("Furthest North: " + north + 
+          " \nFurthest East" + east +
+          " \nFurthest South" + south +
+          " \nFurthest West" + west )
+
     conn.commit()
 
 
