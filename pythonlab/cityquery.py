@@ -49,20 +49,20 @@ def city_queries():
 
     cur.execute("SELECT * FROM states WHERE code LIKE '" + state.upper() + "'")
     temp = cur.fetchone()
-    
+
     if temp != None:
         state = str(temp[1])
 
     cur.execute("SELECT * FROM cities WHERE state LIKE '" + state + "'")
     all_cities = cur.fetchall()
     
-    if all_cities == None:
+    if all_cities == []:
         print(state + ' is not in the database')
     else:
       total_population = 0
       for city in all_cities:
           total_population += city[2]
-      print('total population: ' + str(total_population))
+      print('total population of cities in ' + state + ': ' + str(total_population))
 
     conn.commit()
 
