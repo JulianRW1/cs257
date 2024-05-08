@@ -1,5 +1,5 @@
 function generateBigNumber() {
-  generateNumber(1, 10); 
+  generateNumber(100, 1000); 
 }
 
 function generateSmallNumber() {
