@@ -16,6 +16,6 @@ def changeColor():
     return render_template("changeColor.html")
 
 if __name__ == '__main__':
-    my_port = 5000
+    my_port = 5231
     app.run(host='0.0.0.0', port = my_port) 
 
